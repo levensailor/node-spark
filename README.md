@@ -2,10 +2,28 @@
 
 Cisco Spark API Library for Node JS based on a [Swagger](http://swagger.io/specification/) definition specification.
 
-```js
-var CiscoSpark = require('node-spark');
+#### Features:
 
-CiscoSpark.init({token:'OWQwOGEzMDgtZDYyTOKENjQwLWI2MTTOKEN5YmMzYTI1TOKENzVhNGNjTOKENDgx'})
+- [Rate limiting headers](https://developer.ciscospark.com/blog/blog-details-8193.html) inspected to adjust request rates based on Cisco Spark API. These are automatically re-queued and sent after the `retry-after` timer expires.
+- [Pagination](https://developer.ciscospark.com/pagination.html) automatically invoked when requesting max results greater than the API max.
+- Capable of using either Callbacks or Promises. Promises comply with [A+ standards.](https://promisesaplus.com/)
+- Simple FIFO API queueing mechanism with adjustable delay.
+
+#### Install:
+
+```bash
+npm install --save node-spark
+```
+
+#### Using Promises:
+```js
+var Spark = require('node-spark');
+
+var options = {
+  token:'OWQwOGEzMDgtZDYyTOKENjQwLWI2MTTOKEN5YmMzYTI1TOKENzVhNGNjTOKENDgx'
+};
+
+Spark.init(options)
   .then(spark => {
     spark.rooms.getRooms()
       .then(res => console.log(res))
@@ -13,17 +31,25 @@ CiscoSpark.init({token:'OWQwOGEzMDgtZDYyTOKENjQwLWI2MTTOKEN5YmMzYTI1TOKENzVhNGNj
   });
 ```
 
-#### Features:
+#### Using Callbacks:
+```js
+var Spark = require('node-spark');
 
-- [Rate limiting headers](https://developer.ciscospark.com/blog/blog-details-8193.html) inspected to adjust request rates based on Cisco Spark API. These are automatically re-queued and sent after the `retry-after` timer expires.
-- [Pagination](https://developer.ciscospark.com/pagination.html) automatically invoked when requesting max results greater than the API max.
-- Returns promises that comply with [A+ standards.](https://promisesaplus.com/)
-- Simple FIFO API queueing mechanism with adjustable delay.
+var options = {
+  token:'OWQwOGEzMDgtZDYyTOKENjQwLWI2MTTOKEN5YmMzYTI1TOKENzVhNGNjTOKENDgx'
+};
 
-### Install
-
-```bash
-npm install --save node-spark
+Spark.init(options, function(err, spark) {
+  if(err) {
+    console.log('error initializing spark api');
+  } else {
+    spark.rooms.getRooms(function(res) {
+      console.log(res);
+    }, function(err) {
+      console.log(err.message);
+    });
+  }
+});
 ```
 
 ### Initialization / Config
@@ -31,18 +57,11 @@ npm install --save node-spark
 The `.init()` method accepts an `options` object. The only required object key property required is the `token`. Below shows the optional properties to override defaults for non-required options.
 
 ```js
-var CiscoSpark = require('node-spark');
-
 var options = {
   token: 'OWQwOGEzMDgtZDYyTOKENjQwLWI2MTTOKEN5YmMzYTI1TOKENzVhNGNjTOKENDgx',
   swagger: 'https://raw.githubusercontent.com/CumberlandGroup/swagger-cisco-spark/master/cisco_spark_v1.json',
   delay: 600
 };
-
-CiscoSpark.init(options)
-  .then(spark => {
-    // spark api calls
-  })
 ```
 
 #### Options Object
@@ -51,17 +70,19 @@ CiscoSpark.init(options)
 - `swagger` : File path or URL to over-ride the internal swagger file definition
 - `delay` : Delay in ms between requests
 
-### Reference
+### Calling the Spark API
 
 The `init` method returns a the spark object that includes the following methods and events.
 
 `spark.<resource>.<method>(<query>)`
 
-The resource and method are defined in the swagger file. If not specified, an internal swagger definition file. For more information on the resource/method/query, reference this github [repository.](https://github.com/CumberlandGroup/swagger-cisco-spark)
+The resource and method are defined in the Swagger definition. If not specified, an internal swagger definition file is used. For more information on the resource/method/query, reference this github [repository.](https://github.com/CumberlandGroup/swagger-cisco-spark)
+
+### Events
 
 `spark.api.on('<event>', function(<event params>) { // process event });`
 
-Events:
+Events Types:
 
 - `request` - Emitted with each API request. The callback executed with the arguments:
   - `url` : requested URL
