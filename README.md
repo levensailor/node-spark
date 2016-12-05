@@ -15,7 +15,7 @@ Cisco Spark API Library for Node JS based on a [Swagger](http://swagger.io/speci
 npm install --save node-spark
 ```
 
-#### Using Promises:
+#### Example: (Using Promises)
 ```js
 var Spark = require('node-spark');
 
@@ -31,7 +31,7 @@ Spark.init(options)
   });
 ```
 
-#### Using Callbacks:
+#### Example: (Using Callbacks)
 ```js
 var Spark = require('node-spark');
 
@@ -43,7 +43,7 @@ Spark.init(options, function(err, spark) {
   if(err) {
     console.log('error initializing spark api');
   } else {
-    spark.rooms.getRooms(function(res) {
+    spark.rooms.getRooms({}, function(res) {
       console.log(res);
     }, function(err) {
       console.log(err.message);
