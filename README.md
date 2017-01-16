@@ -1,5 +1,5 @@
 # node-spark
-**v2.1.0**
+**v2.2.0**
 
 Cisco Spark API Library for Node JS based on a [Swagger](http://swagger.io/specification/) definition specification.
 
@@ -31,11 +31,10 @@ var options = {
 
 var spark = new CiscoSpark(options);
 
-spark.connect(client => {
-  client.rooms.getRooms()
-    .then(res => console.log(res))
-    .catch(err => console.log(err.message));
-});
+spark.connect()
+  .then(client => client.rooms.getRooms())
+  .then(res => console.log(res))
+  .catch(err => console.log(err.message));
 ```
 
 ### Initialization / Config
@@ -60,7 +59,7 @@ _**Note:** While this library will respect the Rate Limiting Headers, the outbou
 
 ### Calling the Spark API
 
-The `Spark.connect()` method returns a spark client object that includes the following methods and events.
+The `Spark.connect()` method returns a spark client object promise that includes the following methods and events.
 
 `client.<resource>.<method>(<query>)`
 
