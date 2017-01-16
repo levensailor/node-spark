@@ -3,7 +3,7 @@
 
 Cisco Spark API Library for Node JS based on a [Swagger](http://swagger.io/specification/) definition specification.
 
-### Features:
+### Features
 
 - [Rate limiting headers](https://developer.ciscospark.com/blog/blog-details-8193.html) inspected to adjust request rates based on Cisco Spark API. These are automatically re-queued and sent after the `retry-after` timer expires.
 - [Pagination](https://developer.ciscospark.com/pagination.html) automatically invoked when requesting max results greater than the API max.
@@ -11,7 +11,7 @@ Cisco Spark API Library for Node JS based on a [Swagger](http://swagger.io/speci
 - Simple FIFO API queueing mechanism with adjustable delay.
 - [Webhook](https://github.com/cumberlandgroup/node-spark-webhook) submodule.
 
-### Project Setup/Install:
+### Project Setup/Install
 
 ```bash
 mkdir myproject
@@ -21,7 +21,7 @@ npm install --save node-spark
 touch index.js
 ```
 
-**Example index.js**
+**Example index.js:**
 ```js
 var CiscoSpark = require('node-spark');
 
@@ -91,7 +91,7 @@ Events Types:
 
 The webhook submodule can optionally be implemented directly from node-spark without a direct dependency on the node-spark-webhook package. For details on usage, refer to the submodule's [README.md](https://github.com/cumberlandgroup/node-spark-webhook).
 
-**Project Setup**
+**Project Setup:**
 ```bash
 mkdir myproject
 cd myproject
