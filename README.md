@@ -1,5 +1,5 @@
 # node-spark
-**v2.0.0**
+**v2.1.0**
 
 Cisco Spark API Library for Node JS based on a [Swagger](http://swagger.io/specification/) definition specification.
 
@@ -9,14 +9,19 @@ Cisco Spark API Library for Node JS based on a [Swagger](http://swagger.io/speci
 - [Pagination](https://developer.ciscospark.com/pagination.html) automatically invoked when requesting max results greater than the API max.
 - Promises comply with [A+ standards.](https://promisesaplus.com/)
 - Simple FIFO API queueing mechanism with adjustable delay.
+- [Webhook](https://github.com/cumberlandgroup/node-spark-webhook) submodule.
 
-### Install:
+### Project Setup/Install:
 
 ```bash
+mkdir myproject
+cd myproject
+npm init
 npm install --save node-spark
+touch index.js
 ```
 
-#### Usage: *(new in v.2)*
+**Example index.js**
 ```js
 var CiscoSpark = require('node-spark');
 
@@ -81,6 +86,49 @@ Events Types:
   - `url` : requested URL
   - `headersObj` :  object containing the headers of request
   - `bodyObj` : object containing the contents body of the request
+
+### Webhook submodule
+
+The webhook submodule can optionally be implemented directly from node-spark without a direct dependency on the node-spark-webhook package. For details on usage, refer to the submodule's [README.md](https://github.com/cumberlandgroup/node-spark-webhook).
+
+**Project Setup**
+```bash
+mkdir myproject
+cd myproject
+npm init
+npm install --save node-spark
+npm install --save express
+npm install --save body-parser
+touch index.js
+```
+
+**Example index.js: (embedded into an express.js app)**
+```js
+"use strict";
+
+var Webhook = require('node-spark/webhook');
+var express = require('express');
+var bodyParser = require('body-parser');
+var path = require('path');
+
+var webhook = new Webhook();
+
+// add events
+webhook.on('request', function(hook) {
+  console.log('%s.%s web hook received', hook.resource, hook.event)
+});
+
+var app = express();
+app.use(bodyParser.json());
+
+// add route for path that which is listening for web hooks
+app.post('/spark', webhook.listen());
+
+// start express server
+var server = app.listen('3000', function () {
+  console.log('Listening on port %s', '3000');
+});
+```
 
 ### License
 
