@@ -1,6 +1,6 @@
 {
   "name": "node-spark",
-  "version": "2.2.4",
+  "version": "2.2.5",
   "description": "Cisco Spark API for Node JS",
   "main": "lib/spark.js",
   "scripts": {
