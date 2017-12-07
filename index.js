@@ -240,8 +240,8 @@ app.use(bodyParser.json());
 app.post('/spark', webhook.listen());
 
 // start express server
-var server = app.listen('3000', function () {
-  console.log('Listening on port %s', '3000');
+var server = app.listen(process.env.PORT || 3000), function () {
+  console.log('Listening on port %s', process.env.PORT);
 });
 
 process.on('SIGINT', function() {
