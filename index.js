@@ -48,8 +48,8 @@ webhook.on('request', function(hook) {
         .result('id')
         .value();
 
-    const messageContentsFromId = spark.client.messages.getMessage(messageId);
-    console.log(messageContentsFromId);
+//    const messageContentsFromId = spark.client.messages.getMessage(messageId);
+//    console.log(messageContentsFromId);
 
     const roomType = _.chain(hook)
         .result('data')
