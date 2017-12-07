@@ -237,7 +237,7 @@ var app = express();
 app.use(bodyParser.json());
 
 // add route for path that which is listening for web hooks
-app.post('/', webhook.listen());
+app.post('/spark', webhook.listen());
 
 // start express server
 var server = app.listen('3000', function () {
