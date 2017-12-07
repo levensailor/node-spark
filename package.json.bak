@@ -1,0 +1,31 @@
+{
+  "name": "node-spark",
+  "version": "2.2.5",
+  "description": "Cisco Spark API for Node JS",
+  "main": "lib/spark.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cumberlandgroup/node-spark.git"
+  },
+  "keywords": [
+    "cisco",
+    "spark",
+    "api",
+    "swagger"
+  ],
+  "author": "Nicholas Marus <nick.marus@cumberlandgroupit.com>",
+  "license": "LGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/cumberlandgroup/node-spark/issues"
+  },
+  "homepage": "https://github.com/cumberlandgroup/node-spark#readme",
+  "dependencies": {
+    "debug": "2.6.0",
+    "request": "2.78.0",
+    "swagger-client": "2.1.23",
+    "when": "3.7.7"
+  }
+}

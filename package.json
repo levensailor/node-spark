@@ -1,31 +1,37 @@
 {
-  "name": "node-spark",
-  "version": "2.2.5",
-  "description": "Cisco Spark API for Node JS",
+  "name": "bugz",
+  "version": "1.0.0",
+  "description": "bugz is a cisco support bot for bug notifications and information",
   "main": "lib/spark.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cumberlandgroup/node-spark.git"
+    "url": "git+https://github.com/levensailor/node-spark.git"
   },
   "keywords": [
+    "bugz",
     "cisco",
-    "spark",
-    "api",
-    "swagger"
+    "support",
+    "bot",
+    "spark"
   ],
-  "author": "Nicholas Marus <nick.marus@cumberlandgroupit.com>",
-  "license": "LGPL-3.0",
-  "bugs": {
-    "url": "https://github.com/cumberlandgroup/node-spark/issues"
-  },
-  "homepage": "https://github.com/cumberlandgroup/node-spark#readme",
+  "author": "Jeff Levensailor",
+  "license": "MIT",
   "dependencies": {
     "debug": "2.6.0",
-    "request": "2.78.0",
     "swagger-client": "2.1.23",
-    "when": "3.7.7"
+    "when": "3.7.7",
+    "auto-sni": "^2.3.2",
+    "body-parser": "^1.18.2",
+    "dotenv": "^4.0.0",
+    "express": "^4.16.2",
+    "jsonpath": "^1.0.0",
+    "jsonpath-plus": "^0.16.0",
+    "lodash": "^4.17.4",
+    "node-spark": "^2.2.5",
+    "request": "2.78.0",
+    "ssl-config": "^1.0.0"
   }
 }
