@@ -21,17 +21,6 @@ var spark = new CiscoSpark(options);
 spark.connect()
   .then(client => client.rooms.getRooms())
   .catch(err => console.log(err.message));
-  .then(client => client.webhook
-    .updateWebhook(
-    {
-      "body": {
-        "name": "name string",
-        "targetUrl": "targetUrl string"
-      },
-      "webhookId": "webhookId string"
-}
-)
-)
 
 
 var Webhook = require('node-spark/webhook');
@@ -249,7 +238,7 @@ var app = express();
 app.use(bodyParser.json());
 
 // add route for path that which is listening for web hooks
-app.post('/', webhook.listen());
+app.post('/spark', webhook.listen());
 
 // start express server
 var server = app.listen(process.env.PORT || 3000, function () {
