@@ -33,11 +33,13 @@ var token = '';
 
 // add events
 webhook.on('request', function(hook) {
-  console.log('%s.%s web hook received', hook.resource, hook.event)
+  console.log('%s.%s web hook received', hook.resource, hook.event);
+  console.log(JSON.stringify(hook));
   //debug JSON data - paste in http://www.jsonquerytool.com/#/Lodash to build query! real time saver
   fs.writeFile('./log.json',JSON.stringify(hook), 'utf-8', function(err){
     if (err) throw err
     })
+
 
     const roomId = _.chain(hook)
     .result('data')
