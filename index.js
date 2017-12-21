@@ -241,7 +241,7 @@ var app = express();
 app.use(bodyParser.json());
 
 // add route for path that which is listening for web hooks
-app.post('/', webhook.listen());
+app.post('/webhook', webhook.listen());
 
 // start express server
 var server = app.listen(process.env.PORT || 3000, function () {
