@@ -40,21 +40,22 @@ webhook.on('request', function(hook) {
     if (err) throw err
     })
 
-
     const roomId = _.chain(hook)
-    .result('data')
-    .result('roomId')
-    .value();
-
-    const messageId = _.chain(hook)
+        .result('originalRequest')
         .result('data')
-        .result('id')
+        .result('data')
+        .result('roomId')
         .value();
 
-//    const messageContentsFromId = spark.client.messages.getMessage(messageId);
-//    console.log(messageContentsFromId);
+    const bugId = _.chain(hook)
+        .result('result')
+        .result('parameters')
+        .result('bugid')
+        .value();
 
     const roomType = _.chain(hook)
+        .result('originalRequest')
+        .result('data')
         .result('data')
         .result('roomType')
         .value();
